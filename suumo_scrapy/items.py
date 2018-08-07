@@ -35,7 +35,7 @@ def to_space(value):
     return re.sub('\s+', ' ', value)
 
 def to_int(value):
-    return int(float(value[0:-2]) * 10000)
+    return int(float(value[0:-2]) * 10)
 
 def transfer_year(value):
     if value == '新築':
@@ -94,9 +94,11 @@ class SuumoArticleItem(scrapy.Item):
     crawl_time = scrapy.Field()
 
     def save_to_es(self):
-        article = Article()
         if self.get('name') is None:
             return
+        # if self.get('address')[0:3] != '東京都':
+        #     return
+        article = Article()
         article.name = self['name']
         article.price = to_int(self.get('price'))
         article.url = self['url']
