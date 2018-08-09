@@ -32,7 +32,7 @@ class CustomAnalyzer(_CustomAnalyzer):
 class Article(Document):
 
     name = Text(analyzer="kuromoji_analyzer")
-    price = Integer()
+    price = Float()
     url = Keyword()
     url_object_id = Keyword()
 
